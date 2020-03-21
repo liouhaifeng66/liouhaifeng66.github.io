@@ -44,8 +44,8 @@
 <div class="overlay" style="background: #4d4d4d"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="" class="profilepic">
-			<img src="/img/t.jpg" class="js-avatar">
+		<a href="/" class="profilepic">
+			<img src="" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">刘海沣</a></h1>
@@ -154,6 +154,162 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Lombok的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/21/Lombok%E7%9A%84%E4%BD%BF%E7%94%A8/">&#39;Lombok的使用&#39;</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/21/Lombok%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2020-03-21T06:51:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Lombok是什么"><a href="#Lombok是什么" class="headerlink" title="Lombok是什么?"></a>Lombok是什么?</h2><p><img src="D:%5C%E6%A1%8C%E9%9D%A2%5Cimage-8.png" alt=""></p>
+<h2 id="怎样使用Lombok？"><a href="#怎样使用Lombok？" class="headerlink" title="怎样使用Lombok？"></a>怎样使用Lombok？</h2><p>1、IDEA下载插件</p>
+<p><img src="D:%5C%E6%A1%8C%E9%9D%A2%5CQQ%E6%88%AA%E5%9B%BE20200321145420.png" alt=""></p>
+<p>2、引入依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;    </span><br><span class="line">&lt;groupId&gt;org.projectlombok&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;lombok&lt;&#x2F;artifactId&gt;    </span><br><span class="line">&lt;version&gt;1.18.6&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用的注解"><a href="#常用的注解" class="headerlink" title="常用的注解"></a>常用的注解</h3><p>1、@Data</p>
+<p> 作用于类上，是以下注解的集合：<code>@ToString @EqualsAndHashCode @Getter @Setter @RequiredArgsConstructor</code>，当类的属性中没有必须属性（即使用<code>final</code>关键字声明的属性），那么会生成一个无参构造器。否则生成一个由所有被<code>final</code>关键字（或者将标记为@NoNull的属性生成一个构造器 ）声明属性的有参构造函数。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class Student &#123;</span><br><span class="line">    private String id;</span><br><span class="line">    private final String name;</span><br><span class="line">    private Date birthday;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、@Getter和@Setter</p>
+<p> 为属性生成对应的<code>get()</code>和<code>set()</code>,声明在类上的时候为所有属性生成对应方法，声明在某个属性的时候，为这个属性生成对应方法。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Getter</span><br><span class="line">@Setter</span><br><span class="line">public class Student &#123;</span><br><span class="line">    private String id;</span><br><span class="line">    private String name;</span><br><span class="line">    private Date birthday;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、构造函数注解</p>
+<ol>
+<li><p>@AllArgsConstructor（全参构造）</p>
+</li>
+<li><p>@NoArgsConstructor （空参构造）</p>
+</li>
+<li><p>@RequiredArgsConstructor （部分参数构造，参数使用<strong><code>final</code></strong>关键字声明）</p>
+<ul>
+<li><p>空参构造和全参构造 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public class Student &#123;</span><br><span class="line">    private String id;</span><br><span class="line">    private String name;</span><br><span class="line">    private Date birthday;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部分参数构造和全参构造 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RequiredArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public class Student &#123;</span><br><span class="line">    private final String id;</span><br><span class="line">    private String name;</span><br><span class="line">    private Date birthday;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="注解表"><a href="#注解表" class="headerlink" title="注解表"></a>注解表</h3><table>
+<thead>
+<tr>
+<th><strong>注解名</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Setter</td>
+<td>生成setter方法,final变量不包含</td>
+</tr>
+<tr>
+<td>@Getter</td>
+<td>生成getter方法,final变量不包含</td>
+</tr>
+<tr>
+<td>@NoArgsConstructor</td>
+<td>生成空参构造</td>
+</tr>
+<tr>
+<td>@AllArgsConstructor</td>
+<td>生成全部参数构造</td>
+</tr>
+<tr>
+<td>@RequiredArgsConstructor</td>
+<td>将标记为@NoNull的属性生成一个构造器</td>
+</tr>
+<tr>
+<td>@ToString</td>
+<td>生成所有属性的toString()方法</td>
+</tr>
+<tr>
+<td>@EqualsAndHashCode</td>
+<td>生成equals()方法和hashCode方法</td>
+</tr>
+<tr>
+<td>@Data(常用)</td>
+<td>@Data直接修饰POJO or beans， getter所有的变量，setter所有不为final的变量。如果你不需要默认的生成方式，直接填写你需要的annotation的就可以了。默认生成的所有的annotation都是public的，如果需要不同权限修饰符可以使用AccessLevel.NONE选项。当然@Data 也可以使用staticConstructor选项生成一个静态方法。 =@Setter+@Getter+@EqualsAndHashCode+@NoArgsConstructor</td>
+</tr>
+<tr>
+<td>@Builder</td>
+<td>构造Builder模式的结构。通过内部类Builder()进行构建对象。</td>
+</tr>
+<tr>
+<td>@Value</td>
+<td>与@Data相对应的@Value， 两个annotation的主要区别就是如果变量不加@NonFinal ，@Value会给所有的弄成final的。当然如果是final的话，就没有set方法了。</td>
+</tr>
+<tr>
+<td>@Synchronized</td>
+<td>同步方法</td>
+</tr>
+<tr>
+<td>@Cleanup</td>
+<td>自动调用close方法关闭资源</td>
+</tr>
+<tr>
+<td>@SneakyThrows</td>
+<td>可以对受检异常进行捕捉并抛出</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/21/Lombok%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java编程思想：一切都是对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -244,81 +400,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/03/08/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%9A%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%AF%B9%E8%B1%A1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/03/07/hello-world/" class="archive-article-date">
-  	<time datetime="2020-03-07T09:10:56.046Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/07/hello-world/">展开全文 >></a>
         </p>
       
 
